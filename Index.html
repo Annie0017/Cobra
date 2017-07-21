@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.route.js"></script> 
+    
+        <script src="Scripts/angular.min.js"></script>
+        <script src="Scripts/angular.js"></script>
+        <script src="Scripts/angular-route.js"></script>
+        <link href="Content/bootstrap.css" rel="stylesheet" />
+        <script src="Scripts/bootstrap.js"></script>
+        <script src="Scripts/jquery-1.10.2.js"></script>
+        <script src="App/onboard-login-app.js"></script>
+</head>
+<body  ng-app="onboardapp">
+
+    <div class="container">
+        <nav role="navigation" class="navbar nav navbar-inverse">
+
+            <ul class="nav navbar nav">                
+                <li class="active"><a href="#Home">Home</a></li>                
+                <li><a href="#Add">Add</a></li>
+                <li><a href="#Edit">Edit</a></li>
+                <li><a href="#Delete">Delete</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+        <div ng-view>
+
+        </div>
+   <script>
+       
+       var onboardapp = angular.module("onboardapp", ["ngRoute"]);   //step1 inject ng-route module
+
+
+       onboardapp.config([$routeProvider, function ($routeProvider) {    // Step 2:cretae route provider service
+           $routeProvider.
+           when("/Add", {
+               templateUrl: "FrontEndViews/Add.html",                         //step3: configure the routes by attaching views and controller 
+               controller: "AddController"
+           }).
+           when("/Edit", {
+               templateUrl: "FrontEndViews/Edit.html",
+               controller: 'EditController'
+           }).
+           when("/Delete", {
+               templateUrl: "FrontEndViews/Delete.html",
+               controller: 'DeleteController'
+           }).
+           when("/Home", {
+               templateUrl: "FrontEndViews/home.html",
+               controller: 'HomeController'
+           }).
+           otherwise({
+               redirectTo: "/Home"
+           });
+
+
+
+       }]);
+
+       onboardapp.controller("AddController", function ($scope) {
+           $scope.message = "in add view";
+       });
+
+       onboardapp.controller("EditController", function ($scope) {
+           $scope.message = "in edit view";
+       });
+
+       onboardapp.controller("DeleteController", function ($scope) {
+           $scope.message = "in delete view";
+       });
+
+       onboardapp.controller("HomeController", function ($scope) {
+           $scope.message = "in Home view";
+       });
+
+   </script>
+</body>
+</html>
